@@ -1,0 +1,16 @@
+{
+    "name": "orangeshadow/tovari-mailru",
+    "description": "Создание XML Прайс листа для выгрузки в Товары mail.ru",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Anton Alexeev",
+            "email": "alexeev.sker@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "OrangeShadow\\TovariMailRu\\": "src/" }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
