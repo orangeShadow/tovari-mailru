@@ -38,7 +38,7 @@ $cleanFunction = function($value,$key){
     return htmlentities($value);
 };
 
-$dom = use OrangeShadow\TovariMailRu\CreateXML($array,$cleanFunction);
+$dom = new OrangeShadow\TovariMailRu\CreateXML($array,$cleanFunction);
 
 //Вывод xml
 echo $dom
