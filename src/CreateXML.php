@@ -220,6 +220,10 @@ class CreateXML
 
         if (!is_string($value) && !is_numeric($value)) throw new \Exception('Ожидается строка, передан ' . gettype($value) . ' ' . print_r($value, true));
 
+        if($key=="offer.description"){
+            return "<![CDATA[".$value."]]>";
+        }
+
         return htmlentities($value);
     }
 
