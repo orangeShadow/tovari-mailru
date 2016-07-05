@@ -216,6 +216,8 @@ class CreateXML
             return call_user_func($this->cleanFunction,$value, $key);
         }
 
+        if(empty($value)) return $value;
+
         if (!is_string($value) && !is_numeric($value)) throw new \Exception('Ожидается строка, передан ' . gettype($value) . ' ' . print_r($value, true));
 
         return htmlentities($value);
