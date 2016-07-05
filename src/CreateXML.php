@@ -64,7 +64,7 @@ class CreateXML
      */
     public function setName($value)
     {
-        if(!is_string($value)) throw new \Exception('Ожидается строка, передано: '. print_r($value,true));
+        if (!is_string($value)) throw new \Exception('Ожидается строка, передано: ' . print_r($value, true));
 
         array_push($this->xmlElements, $this->dom->createElement('name', $this->clean($value, 'name')));
     }
@@ -76,7 +76,7 @@ class CreateXML
      */
     public function setCompany($value)
     {
-        if(!is_string($value)) throw new \Exception('Ожидается строка, передано: '.print_r($value,true));
+        if (!is_string($value)) throw new \Exception('Ожидается строка, передано: ' . print_r($value, true));
         array_push($this->xmlElements, $this->dom->createElement('company', $this->clean($value, 'company')));
     }
 
@@ -87,7 +87,7 @@ class CreateXML
      */
     public function setUrl($value)
     {
-        if(!is_string($value)) throw new \Exception('Ожидается строка, передано: '.print_r($value,true));
+        if (!is_string($value)) throw new \Exception('Ожидается строка, передано: ' . print_r($value, true));
         array_push($this->xmlElements, $this->dom->createElement('url', $this->clean($value, 'url')));
     }
 
@@ -131,7 +131,7 @@ class CreateXML
             if (!empty($errors))
                 throw new \Exception('Ошибка при создании каталога' . print_r($errors, true) . "\nПередан массив: " . print_r($category, true));
 
-            $categoryElement = $this->dom->createElement('category', $this->clean($category['name'],'category.name'));
+            $categoryElement = $this->dom->createElement('category', $this->clean($category['name'], 'category.name'));
             unset($category["name"]);
             foreach ($category as $key => $value) {
                 $categoryElement->setAttribute($key, $value);
@@ -172,9 +172,12 @@ class CreateXML
             }
 
             foreach ($offer as $key => $property) {
-                if($key=="description"){
-                    $propertyElement = $this->dom->createCDATASection($key, $this->clean($property, "offer." . $key));
-                }else{
+                if ($key == "description") {
+
+                    $propertyElement = $this->dom->createElement($key);
+                    $propertyElement->appendChild($this->dom->createCDATASection(htmlentities($property)));
+
+                } else {
                     $propertyElement = $this->dom->createElement($key, $this->clean($property, "offer." . $key));
 
                 }
@@ -187,8 +190,9 @@ class CreateXML
     }
 
 
-    public function setCleanFunction($function){
-        if(is_callable($function)) {
+    public function setCleanFunction($function)
+    {
+        if (is_callable($function)) {
             $this->cleanFunction = $function;
         }
     }
@@ -218,14 +222,14 @@ class CreateXML
     protected function clean($value, $key)
     {
         if (!empty($this->cleanFunction) && is_callable($this->cleanFunction)) {
-            return call_user_func($this->cleanFunction,$value, $key);
+            return call_user_func($this->cleanFunction, $value, $key);
         }
 
-        if(empty($value)) return $value;
+        if (empty($value)) return $value;
 
         if (!is_string($value) && !is_numeric($value)) throw new \Exception('Ожидается строка, передан ' . gettype($value) . ' ' . print_r($value, true));
 
-        if($key=="offer.description"){
+        if ($key == "offer.description") {
             return $value;
         }
 
