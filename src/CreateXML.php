@@ -172,15 +172,9 @@ class CreateXML
             }
 
             foreach ($offer as $key => $property) {
-                if ($key == "description") {
 
-                    $propertyElement = $this->dom->createElement($key);
-                    $propertyElement->appendChild($this->dom->createCDATASection(htmlentities($property)));
+                $propertyElement = $this->dom->createElement($key, $this->clean($property, "offer." . $key));
 
-                } else {
-                    $propertyElement = $this->dom->createElement($key, $this->clean($property, "offer." . $key));
-
-                }
                 $offerElement->appendChild($propertyElement);
             }
             $offersElement->appendChild($offerElement);
@@ -229,11 +223,7 @@ class CreateXML
 
         if (!is_string($value) && !is_numeric($value)) throw new \Exception('Ожидается строка, передан ' . gettype($value) . ' ' . print_r($value, true));
 
-        if ($key == "offer.description") {
-            return $value;
-        }
-
-        return htmlentities($value);
+        return htmlspecialchars($value);
     }
 
     /**
