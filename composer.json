@@ -13,5 +13,7 @@
         "psr-4": { "OrangeShadow\\TovariMailRu\\": "src/" }
     },
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": ">=5.4.0"
+    }
 }

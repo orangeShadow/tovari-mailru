@@ -100,7 +100,7 @@ class CreateXML
     {
         $currenciesElement = $this->dom->createElement('currencies');
         foreach ($currencies as $currency) {
-            if (!isset($currency['id']) || !isset($currency['rate'])) throw new \Exception('Неверно передан массив валют, отсутствует id или rate' . print_r($currency, true));
+            if (!isset($currency['id'])) throw new \Exception('Неверно передан массив валют, отсутствует id' . print_r($currency, true));
             $currencyElement = $this->dom->createElement('currency');
             foreach ($currency as $key => $value) {
                 $currencyElement->setAttribute($key, $this->clean($value, "currency." . $key));
@@ -167,7 +167,7 @@ class CreateXML
             }
 
             if (isset($offer['cbid'])) {
-                $offerElement->setAttribute('id', $offer['cbid']);
+                $offerElement->setAttribute('cbid', $offer['cbid']);
                 unset($offer['cbid']);
             }
 
