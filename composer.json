@@ -1,7 +1,7 @@
 {
     "name": "orangeshadow/tovari-mailru",
     "description": "Создание XML Прайс листа для выгрузки в Товары mail.ru",
-    "license": "Apache",
+    "license": "MIT",
     "keywords": ["mail.ru","tovari mail.ru","товары mail.ru"],
     "authors": [
         {
